@@ -609,7 +609,8 @@ Once the workflow has completed, navigate to **Releases** in the right sidebar.
 > release title, the release notes, and the `schema.svg` download link, and
 > insert it here.
 >
-> `[insert screenshot]`
+> <img width="1820" height="687" alt="image" src="https://github.com/user-attachments/assets/77fe402d-d059-4469-94d8-b4505abb652c" />
+
 
 ### Questions for Task 6
 
@@ -618,14 +619,15 @@ Once the workflow has completed, navigate to **Releases** in the right sidebar.
 Which takes longer, and by approximately what factor? What does this suggest
 about where optimisation effort should be directed?
 
-> *Your answer:*
+> Looking at my Actions Install PlantUML took 11s and Render SVG took 2s.This comparison that installation takes roughly 5–6 times longer than the actual rendering. This  suggests that optimisation effort should be directed at the installation step since that's where most of the time is wasted, not in the actual work of rendering the diagram.
 
 **Question 6.2:** Download `schema.svg` from the Release page and compare it
 to the `schema.svg` you rendered locally with `plantuml -tsvg schema.puml`.
 Are they identical? What does this tell you about the reproducibility of the
 build process?
 
-> *Your answer:*
+> Yes, they match exactly. That means the build is fully reproducible: as long as you use the same `schema.puml` file and the same PlantUML version, you’ll get identical results every time . So whatever CI publishes is a reliable reflection of the source.
+
 
 ---
 
@@ -639,7 +641,9 @@ your schema. What would be different if you had stored the diagram as a
 `.drawio` file or a PNG instead of a `.puml` file? What information would you
 lose?
 
-> *Your answer:*
+> If the diagram was saved as a `.drawio` or PNG, Git would notice that something changed but it wouldn’t tell you what actually changed. Binary files are basically a black box to Git, so `git diff` just says files differ without giving any useful details.
+However, it’s a completely different story with a `.puml` file,. Since it’s plain text, you can clearly see every change. with binary files its most probable that you will loose that transparency,and by transparency i mean  the ability to look at a commit and immediately understand the changes and what caused them.
+
 
 **Question B – Collaboration:**
 Imagine two people editing `schema.puml` simultaneously on separate branches –
@@ -647,14 +651,22 @@ one adds a `Genre` entity, the other corrects a cardinality. When they merge,
 Git can show a textual diff of the conflict. Would this be possible with a
 binary diagram file? What practical consequence does this have for a team?
 
-> *Your answer:*
+> With a binary file like `.drawio` or PNG, Git basically just sees two different versions of a black box. It can tell they’re not the same, but it has no way to understand the changes or merge them automatically.
+Someone would have to manually decide which version to keep, likely losing one person's work entirely.
+Since `schema.puml` is just plain text, Git can pinpoint exactly which lines are in conflict. And if the changes are in different parts of the file, it can often merge them automatically without any issues.
+In practice, this makes a big difference for a team. Multiple people can work on the schema at the same time without stepping on each other’s toes, and if conflicts do come up, they’re clear and easy to sort out.
+
 
 **Question C – Tag vs. branch for releases:**
 You tagged a specific commit as `v1.0.0` rather than pushing to a branch called
 `release`. What guarantee does an annotated tag offer that a branch cannot?
 Under what circumstance would someone want to use a branch instead?
 
-> *Your answer:*
+> An annotated tag is a fixed, permanent reference—once you create it, it always points to that exact commit. It can’t be accidentally moved by later changes. On top of that, it includes useful details like who created it, when, and a message, so it serves as a reliable record of what was released and when.
+A branch, on the other hand, keeps moving forward as new commits are added, so it doesn’t give you that same kind of fixed, reliable reference.
+
+A release branch makes more sense when you need to keep updating a specific version over time. For example, if you’re still fixing bugs or adding small patches to version 1.0 while development moves ahead on version 2.0, you might maintain branches like `release/1.0` and `release/2.0` in parallel. That way, each version can evolve independently, which is especially useful in long-term support scenarios.
+
 
 **Question D – The value of CI for documentation:**
 Before this exercise, updating a diagram meant: edit the source, export an
@@ -662,14 +674,15 @@ image, commit the image, hope the export matched the source. Describe in two
 sentences what the CI pipeline eliminates, and what new guarantee it provides
 instead.
 
-> *Your answer:*
+> The CI pipeline eliminates the manual export step and the risk of forgetting to update the image after changing the source . Instead it guarantees that the published `schema.svg` is always automatically generated from the exact source file in the repository, so the diagram and the code can never drift out of sync.
 
 > **Screenshot 6:** Take a screenshot of your terminal showing
 > `git log --oneline` with all commits from this exercise visible, then open
 > `schema.svg` from the Release in the same browser window alongside it.
 > Capture both in one screenshot and insert it here.
 >
-> `[insert screenshot]`
+> <img width="1207" height="539" alt="image" src="https://github.com/user-attachments/assets/509eb0e8-0a9a-4e11-b5ea-0ba57f7e42b1" />
+
 
 ---
 
