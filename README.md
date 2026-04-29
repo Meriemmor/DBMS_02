@@ -597,6 +597,7 @@ Open your fork on GitHub and navigate to the **Actions** tab.
 >
 > <img width="1901" height="868" alt="image" src="https://github.com/user-attachments/assets/a1ade0e1-bbe8-4fd5-900c-7070c8db3cc5" />
 
+<img width="1323" height="603" alt="image" src="https://github.com/user-attachments/assets/4e04d9a9-8b6d-49e5-8a56-ead2ed4962f0" />
 
 Once the workflow has completed, navigate to **Releases** in the right sidebar.
 
