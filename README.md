@@ -327,13 +327,13 @@ git commit -m "chore: ignore generated SVG artifact"
 Name one shell command you could use to check the exit code of the last command
 and verify that the render succeeded, without opening the SVG file.
 
-> *Your answer:*
+> The shell command that we can use in order to check the exit code of the last command is called echo $?. if it prints 0 that means that the render succeeded. Any other number shown means that something went wrong.
 
 **Question 3.2:** Delete `schema.svg` and run `plantuml -tsvg schema.puml` again.
 Then run `git status`. Is `schema.svg` shown as an untracked file? Explain why
 or why not.
 
-> *Your answer:*
+> No, schema.svg is not shown as an untracked file, because we added it to .gitignore. Git completely ignores any file listed there — so even after regenerating it, Git doesn't see it at all.
 
 ---
 
@@ -413,12 +413,12 @@ git tag
 **Question 4.1:** Run `git push origin main`. Then open the **Actions** tab in
 your fork on GitHub. Did any workflow run trigger? Explain why or why not.
 
-> *Your answer:*
+> No workflow triggered because the workflow is only set to fire when a tag starting with v is pushed (on: push: tags: ['v*']). Pushing to a branch doesn't match that trigger, so GitHub Actions simply ignores it completely.
 
 **Question 4.2:** Run `git tag -v v1.0.0`. What information is shown that
 `git tag` alone does not display? What does the `-v` flag verify?
 
-> *Your answer:*
+> git tag alone only shows the tag name. Running git tag -v v1.0.0 shows additional details like the tagger's name, email, date, and the message. The -v flag also verifies the GPG signature of the tag, confirming it was created by who it claims and hasn't been tampered with.
 
 ---
 
@@ -561,14 +561,15 @@ git commit -m "ci: render PlantUML schema and publish GitHub Release on tag"
 if you replaced it with `on: push: branches: ['main']`? Would the release
 workflow still make sense? Why or why not?
 
-> *Your answer:*
+> If the workflow ran on every push to the main branch, it would fire constantly instead of only when you intentionally create a version tag. Releases are meant to be deliberate snapshots of your project, and tags make that clear. Triggering on the branch removes that control and would generate a new release for every single commit—even small changes like fixing a typo.
 
 **Question 5.2:** The step `apt-get install plantuml` takes roughly 20–30 seconds
 on every run. In a larger team with many releases per day, this adds up. Name
 one GitHub Actions mechanism that could eliminate this installation time on
 repeated runs.
 
-> *Your answer:*
+> We can use caching (with the `actions/cache` action) to avoid reinstalling PlantUML every time. The first run installs it as usual, but after that, it gets saved in the cache. On later runs, it’s simply restored from there instead of being downloaded and installed again, which saves a lot of time.
+
 
 ---
 
