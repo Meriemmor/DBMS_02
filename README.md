@@ -730,7 +730,8 @@ instead.
    > **Screenshot 7:** Take a screenshot of your extended `schema.svg` and the
    > corresponding GitHub Release page, and insert it here.
    >
-   > `[insert screenshot]`
+   > <img width="1902" height="872" alt="image" src="https://github.com/user-attachments/assets/92013a2e-c43c-4f54-ae6f-1d9588bc0c77" />
+
 
 ---
 
