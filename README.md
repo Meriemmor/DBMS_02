@@ -65,7 +65,8 @@ git --version
 > **Screenshot 1:** Take a screenshot of your terminal showing all three
 > successful version checks and insert it here.
 >
-> `[insert screenshot]`
+> <img width="894" height="578" alt="image" src="https://github.com/user-attachments/assets/a99817af-b8f7-4f70-84e9-aa8d0000c40e" />
+
 
 ---
 
@@ -216,20 +217,21 @@ git commit -m "feat: complete ER schema for library management"
 ellipses). PlantUML uses Crow's Foot notation. Describe one concrete difference
 in how an N:M relationship is represented in each notation.
 
-> *Your answer:*
+> 
+In Chen notation, an N:M relationship is drawn with a diamond in the middle and the letters "N" and "M" written next to the lines connecting it to the entities. In Crow's Foot notation, there is no diamond at all — instead, the line itself has small symbols at each end (the "crow's foot" fork) that show the many-side directly. So basically Chen uses extra shapes to describe the relationship, while Crow's Foot puts all the information into the line itself.
 
 **Question 2.2:** What would happen if you wrote `@startuml Library` instead of
 `@startuml` at the top of `schema.puml`? Try it locally (`plantuml -tsvg schema.puml`)
 and observe the output filename. Why would this break the workflow?
 
-> *Your answer:*
+> If you write @startuml Library, PlantUML uses the name as the output filename — so instead of schema.svg it generates Library.svg. 
 
 **Question 2.3:** The `Author`–`Book` relationship is N:M. Does your PlantUML
 diagram require you to model the intermediate join table explicitly, or does
 PlantUML abstract it away? At which stage of the design process would the join
 table appear?
 
-> *Your answer:*
+> PlantUML abstracts it away — you just write the N:M relationship directly without any join table.
 
 ---
 
@@ -296,7 +298,8 @@ Open `schema.svg` in a browser or SVG viewer.
 > **Screenshot 2:** Take a screenshot of `schema.svg` open in your browser,
 > showing all five entities and all four relationships, and insert it here.
 >
-> `[insert screenshot]`
+> <img width="640" height="613" alt="image" src="https://github.com/user-attachments/assets/2d89e465-63cc-4ffd-bf7d-4f536bff8fad" />
+
 
 Once the diagram looks correct, tell Git to ignore the generated artifact.
 The workflow will recreate it on every release:
@@ -398,7 +401,8 @@ git tag
 > **Screenshot 3:** Take a screenshot of `git log --oneline -5` showing your
 > commits in order, and insert it here.
 >
-> `[insert screenshot]`
+> <img width="1308" height="125" alt="image" src="https://github.com/user-attachments/assets/b076b038-bb37-4bd5-9749-02f0d48f6b1a" />
+
 
 > **Caveat:** Tags are not pushed automatically with `git push origin main`.
 > You must push them explicitly. Forgetting this step means the workflow never
